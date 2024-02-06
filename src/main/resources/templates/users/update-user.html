@@ -8,7 +8,7 @@
 <h1>Update User</h1>
 <hr/>
 <br/>
-<form th:method="POST" th:action="@{/users/update}" th:object="${userUpdate}">
+<form th:method="POST" th:action="@{/update}" th:object="${userUpdate}">
 
     <input type="hidden" th:field="*{id}" th:value="${userUpdate.getId()}"/>
 

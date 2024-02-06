@@ -22,18 +22,19 @@
         <td th:text="${u.getSurname()}">текущая фамилия</td>
 
         <td>
-            <form th:action="@{'/users/edit/' + ${u.getId()}}">
+            <form th:action="@{'/edit/' + ${u.getId()}}">
                 <button type="submit">update</button>
             </form>
 
         <td>
-            <form th:method="POST" th:action="@{'/users/delete/' + ${u.getId()}}">
+            <form th:method="POST" th:action="@{'/delete/' + ${u.getId()}}">
                 <button type="submit">delete</button>
             </form>
         </td>
     </tr>
 </table>
 <hr/>
-<button><a href="users/addUser">CREATE NEW USER</a></button>
+<button><a href="/addUser">CREATE NEW USER</a></button>
+
 </body>
 </html>

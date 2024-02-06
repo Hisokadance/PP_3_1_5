@@ -13,7 +13,7 @@ import ru.igor.PP_3_1_2.service.UserServices;
 import java.util.List;
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping("/")
 public class UserController {
 
     private final UserServices userServices;
@@ -27,37 +27,37 @@ public class UserController {
     public String getAllUsers(Model model) {
         List<User> userList = userServices.getAllUser();
         model.addAttribute("user", userList);
-        return "users/allusers";
+        return "users/all-users";
     }
 
     @GetMapping("/addUser")
     public String addNewUser(Model model, User newUser) {
         model.addAttribute("user", newUser);
-        return "users/adduser";
+        return "users/add-user";
     }
 
     @PostMapping()
     public String saveNewUser(@ModelAttribute("user") User saveUser) {
         userServices.addUser(saveUser);
-        return "redirect:/users";
+        return "redirect:/";
     }
 
     @GetMapping("/edit/{id}")
-    public String updateUser(@ModelAttribute("id") int id, Model model) {
+    public String updateUser(@ModelAttribute("id") Integer id, Model model) {
         User user = userServices.getUser(id);
         model.addAttribute("userUpdate", user);
-        return "users/updateuser";
+        return "users/update-user";
     }
 
     @PostMapping("/update")
     public String updateNewUser(@ModelAttribute("userUpdate") User updateUser) {
         userServices.updateUser(updateUser);
-        return "redirect:/users";
+        return "redirect:/";
     }
 
     @PostMapping("/delete/{id}")
-    public String deleteUser(@ModelAttribute("id") int id) {
+    public String deleteUser(@ModelAttribute("id") Integer id) {
         userServices.deleteUser(id);
-        return "redirect:/users";
+        return "redirect:/";
     }
 }
