@@ -1,6 +1,6 @@
-package ru.igor.PP_3_1_2.service;
+package ru.igor.PP_3_1_3.service;
 
-import ru.igor.PP_3_1_2.model.User;
+import ru.igor.PP_3_1_3.model.User;
 
 import java.util.List;
 

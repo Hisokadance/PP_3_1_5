@@ -1,6 +1,6 @@
-package ru.igor.PP_3_1_2.dao;
+package ru.igor.PP_3_1_3.dao;
 
-import ru.igor.PP_3_1_2.model.User;
+import ru.igor.PP_3_1_3.model.User;
 
 import java.util.List;
 

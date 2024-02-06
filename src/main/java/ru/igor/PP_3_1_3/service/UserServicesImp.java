@@ -1,10 +1,10 @@
-package ru.igor.PP_3_1_2.service;
+package ru.igor.PP_3_1_3.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.igor.PP_3_1_2.dao.UserDao;
-import ru.igor.PP_3_1_2.model.User;
+import ru.igor.PP_3_1_3.dao.UserDao;
+import ru.igor.PP_3_1_3.model.User;
 
 import java.util.List;
 

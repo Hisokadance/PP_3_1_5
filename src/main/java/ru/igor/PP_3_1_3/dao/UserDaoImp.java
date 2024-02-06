@@ -1,10 +1,10 @@
-package ru.igor.PP_3_1_2.dao;
+package ru.igor.PP_3_1_3.dao;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
-import ru.igor.PP_3_1_2.model.User;
+import ru.igor.PP_3_1_3.model.User;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
