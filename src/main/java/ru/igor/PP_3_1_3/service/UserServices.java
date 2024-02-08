@@ -10,10 +10,10 @@ public interface UserServices {
 
     void addUser(User user);
 
-    User getUser(Integer id);
+    User getUser(Long id);
 
     void updateUser(User updateuser);
 
-    void deleteUser(Integer id);
+    void deleteUser(Long id);
 
 }

@@ -18,8 +18,7 @@
     <tr th:each="u : ${user}">
 
         <td th:text="${u.getId()}">текущее id</td>
-        <td th:text="${u.getName()}">текущее имя</td>
-        <td th:text="${u.getSurname()}">текущая фамилия</td>
+        <td th:text="${u.getUsername()()()}">текущее имя</td>
 
         <td>
             <form th:action="@{'/edit/' + ${u.getId()}}">
