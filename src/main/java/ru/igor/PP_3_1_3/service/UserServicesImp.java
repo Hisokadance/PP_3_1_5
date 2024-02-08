@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.igor.PP_3_1_3.dao.UserDao;
 import ru.igor.PP_3_1_3.model.User;
+import ru.igor.PP_3_1_3.repositories.PeopleRepository;
 
 import java.util.List;
 
@@ -13,10 +14,12 @@ import java.util.List;
 public class UserServicesImp implements UserServices {
 
     private final UserDao userDao;
+    private final PeopleRepository peopleRepository;
 
     @Autowired
-    public UserServicesImp(UserDao userDao) {
+    public UserServicesImp(UserDao userDao, PeopleRepository peopleRepository) {
         this.userDao = userDao;
+        this.peopleRepository = peopleRepository;
     }
 
     @Override
@@ -46,5 +49,6 @@ public class UserServicesImp implements UserServices {
     public User getUser(Long id) {
         return userDao.getUser(id);
     }
+
 }
 

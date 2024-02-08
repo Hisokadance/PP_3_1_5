@@ -23,6 +23,7 @@ public class RegistrationServices {
     public void register(User user) {
         //Шифрование пароля
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole("ROLE_USER");
         peopleRepository.save(user);
     }
 }

@@ -1,10 +1,12 @@
 package ru.igor.PP_3_1_3.security;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import ru.igor.PP_3_1_3.model.User;
 
 import java.util.Collection;
+import java.util.Collections;
 
 public class UserDetailsImpl implements UserDetails {
 
@@ -14,9 +16,10 @@ public class UserDetailsImpl implements UserDetails {
         this.user = user;
     }
 
+    //РОЛЬ ЧЕЛОВЕКА
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return Collections.singletonList(new SimpleGrantedAuthority(user.getRole()));
     }
 
     @Override
