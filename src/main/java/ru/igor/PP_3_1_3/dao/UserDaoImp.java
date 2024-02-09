@@ -29,6 +29,13 @@ public class UserDaoImp implements UserDao {
     }
 
     @Override
+    public User getUserByUsername(String username) {
+        return entityManager.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class)
+                .setParameter("username", username)
+                .getSingleResult();
+    }
+
+    @Override
     public void updateUser(User updateUser) {
         entityManager.merge(updateUser);
     }

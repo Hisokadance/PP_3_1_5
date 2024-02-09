@@ -13,7 +13,7 @@ import ru.igor.PP_3_1_3.service.UserServices;
 import java.util.List;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/admin")
 public class AdminController {
 
     private final UserServices userServices;
@@ -23,7 +23,7 @@ public class AdminController {
         this.userServices = userServices;
     }
 
-    @GetMapping("/admin")
+    @GetMapping
     public String getAllUsers(Model model) {
         List<User> userList = userServices.getAllUser();
         model.addAttribute("user", userList);
