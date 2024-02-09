@@ -7,15 +7,18 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import ru.igor.PP_3_1_3.model.User;
 import ru.igor.PP_3_1_3.services.UserDetailsServicesImpl;
+import ru.igor.PP_3_1_3.services.UserServices;
 
 @Component
 public class UserValidator implements Validator {
 
     private final UserDetailsServicesImpl userDetailsServices;
+    private final UserServices userServices;
 
     @Autowired
-    public UserValidator(UserDetailsServicesImpl userDetailsServices) {
+    public UserValidator(UserDetailsServicesImpl userDetailsServices, UserServices userServices) {
         this.userDetailsServices = userDetailsServices;
+        this.userServices = userServices;
     }
 
     @Override
@@ -26,13 +29,18 @@ public class UserValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         User user = (User) target;
-        try {
-            //создать свой сервис который будет возваращать Optional и вместо исключения проверять есть ли чевовек или нет
-            userDetailsServices.loadUserByUsername(user.getUsername());
-        } catch (UsernameNotFoundException ignored) {
-            return;
+
+        // Проверка на уникальность адреса электронной почты (email)
+        User existingUser = userServices.findByEmail(user.getEmail());
+        if (existingUser != null) {
+            errors.rejectValue("email", "", "Пользователь с таким адресом электронной почты уже существует");
         }
-        errors.rejectValue("username", "", "Человек с таким именнем существует");
+
+        // Проверка на уникальность имени пользователя (username)
+        User existingUserByUsername = userServices.findByUsername(user.getUsername());
+        if (existingUserByUsername != null) {
+            errors.rejectValue("username", "", "Пользователь с таким username уже существует");
+        }
 
     }
 }

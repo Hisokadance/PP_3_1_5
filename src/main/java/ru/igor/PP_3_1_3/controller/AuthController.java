@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.igor.PP_3_1_3.model.User;
-import ru.igor.PP_3_1_3.service.RegistrationServices;
+import ru.igor.PP_3_1_3.services.RegistrationServices;
 import ru.igor.PP_3_1_3.utill.UserValidator;
 
 import javax.validation.Valid;
