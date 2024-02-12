@@ -13,12 +13,10 @@ import java.util.List;
 @Service
 public class UserServices {
 
-    private final RoleRepository roleRepository;
     private final PeopleRepository peopleRepository;
 
     @Autowired
-    public UserServices(RoleRepository roleRepository, PeopleRepository peopleRepository) {
-        this.roleRepository = roleRepository;
+    public UserServices(PeopleRepository peopleRepository) {
         this.peopleRepository = peopleRepository;
     }
 

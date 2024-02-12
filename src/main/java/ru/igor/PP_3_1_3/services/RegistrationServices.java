@@ -29,6 +29,7 @@ public class RegistrationServices {
         if (user.getRoles() == null) {
             user.setRoles(new HashSet<>());
         }
+
         Role userRole = new Role(1L, "ROLE_ADMIN");
         userRole.setName("ROLE_ADMIN");
         user.getRoles().add(userRole);

@@ -23,7 +23,7 @@ public class UserDetailsImpl implements UserDetails {
         List<String> roles = user.getRoles()
                 .stream()
                 .map(Role::getName)
-                .collect(Collectors.toList());
+                .toList();
         return roles.stream()
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());

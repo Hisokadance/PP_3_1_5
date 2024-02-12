@@ -21,7 +21,7 @@ import java.util.Set;
 @Entity
 @Table(name = "user")
 public class User {
-    //ТУТ ДОЛЖНА БЫТЬ ВАЛИДАЦИЯ
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

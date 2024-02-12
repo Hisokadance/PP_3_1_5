@@ -15,14 +15,16 @@ modalEditUser.addEventListener('show.bs.modal', event => {
     // Access the fields of the user with the specified id
     const userId = document.getElementById('edited-user-id')
     const userEmail = document.getElementById('edited-user-email')
+    const userAccountName = document.getElementById('edited-user-username')
     const userPassword = document.getElementById('edited-user-password')
     const userName = document.getElementById('edited-user-name')
     const userAge = document.getElementById('edited-user-age')
 
     userId.value = tableRow.querySelector('td:nth-child(1)').textContent;
     userEmail.value = tableRow.querySelector('td:nth-child(2)').textContent;
+    userAccountName.value = tableRow.querySelector('td:nth-child(4)').textContent;
     userName.value = tableRow.querySelector('td:nth-child(3)').textContent;
-    userAge.value = tableRow.querySelector('td:nth-child(4)').textContent;
+    userAge.value = tableRow.querySelector('td:nth-child(5)').textContent;
 })
 
 modalDeleteUser.addEventListener('show.bs.modal', event => {
@@ -33,11 +35,13 @@ modalDeleteUser.addEventListener('show.bs.modal', event => {
     // Access the fields of the user with the specified id
     const userId = document.getElementById('delete-user-id')
     const userEmail = document.getElementById('delete-user-email')
+    const userAccountName = document.getElementById('delete-user-username')
     const userName = document.getElementById('delete-user-name')
     const userAge = document.getElementById('delete-user-age')
 
     userId.value = tableRow.querySelector('td:nth-child(1)').textContent;
     userEmail.value = tableRow.querySelector('td:nth-child(2)').textContent;
+    userAccountName.value = tableRow.querySelector('td:nth-child(4)').textContent;
     userName.value = tableRow.querySelector('td:nth-child(3)').textContent;
-    userAge.value = tableRow.querySelector('td:nth-child(4)').textContent;
+    userAge.value = tableRow.querySelector('td:nth-child(5)').textContent;
 })

@@ -169,10 +169,10 @@
                                     </br>
 
                                     <label class="form-label fw-bold" for="role-select">Role</label>
-                                    <select class="form-select" id="role-select"
-                                            th:field="*{roles}" multiple>
-                                        <option value="1" th:selected="${listRoles.contains('ROLE_ADMIN')}">ROLE_ADMIN</option>
-                                        <option value="2" th:selected="${listRoles.contains('ROLE_USER')}">ROLE_USER</option>
+                                    <select class="form-select" id="role-select" th:field="*{roles}" multiple>
+                                        <option th:each="role : ${listRoles}"
+                                                th:text="${role.name.split('_')[1]}"
+                                                th:value="${role.id}">
                                     </select>
                                     </br>
 
@@ -240,8 +240,9 @@
                     <label class="form-label fw-bold" for="role-select">Role</label>
                     <select class="form-select" id="role-select-edit-user"
                             th:field="*{roles}" multiple>
-                        <option value="1" th:selected="${listRoles.contains('ROLE_ADMIN')}">ROLE_ADMIN</option>
-                        <option value="2" th:selected="${listRoles.contains('ROLE_USER')}">ROLE_USER</option>
+                        <option th:each="role : ${listRoles}"
+                                th:text="${role.name.split('_')[1]}"
+                                th:value="${role.id}">
                     </select>
 
                     </br>

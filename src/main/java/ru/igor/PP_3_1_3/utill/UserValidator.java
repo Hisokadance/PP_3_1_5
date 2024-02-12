@@ -12,12 +12,10 @@ import ru.igor.PP_3_1_3.services.UserServices;
 @Component
 public class UserValidator implements Validator {
 
-    private final UserDetailsServicesImpl userDetailsServices;
     private final UserServices userServices;
 
     @Autowired
-    public UserValidator(UserDetailsServicesImpl userDetailsServices, UserServices userServices) {
-        this.userDetailsServices = userDetailsServices;
+    public UserValidator( UserServices userServices) {
         this.userServices = userServices;
     }
 
@@ -41,6 +39,5 @@ public class UserValidator implements Validator {
         if (existingUserByUsername != null) {
             errors.rejectValue("username", "", "Пользователь с таким username уже существует");
         }
-
     }
 }

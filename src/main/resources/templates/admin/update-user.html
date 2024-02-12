@@ -41,10 +41,11 @@
 
     <label>
         <th:block th:each="role: ${listRoles}">
-            <label for="role">Select role: </label>
-            <select th:field="*{roles}" id="role">
-                <option value="1" th:selected="${user.roles.contains('ROLE_ADMIN')}">ROLE_ADMIN</option>
-                <option value="2" th:selected="${user.roles.contains('ROLE_USER')}">ROLE_USER</option>
+            <label class="form-label fw-bold" for="role-select">Role</label>
+            <select class="form-select" id="role-select" th:field="*{roles}" multiple>
+                <option th:each="role : ${listRoles}"
+                        th:text="${role.name.split('_')[1]}"
+                        th:value="${role.id}">
             </select>
         </th:block>
     </label>
