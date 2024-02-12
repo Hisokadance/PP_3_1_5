@@ -1,52 +1,21 @@
 package ru.igor.PP_3_1_3.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import ru.igor.PP_3_1_3.model.Role;
 import ru.igor.PP_3_1_3.model.User;
-import ru.igor.PP_3_1_3.repositories.PeopleRepository;
-import ru.igor.PP_3_1_3.repositories.RoleRepository;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
-@Service
-public class UserServices {
+public interface UserServices {
 
-    private final PeopleRepository peopleRepository;
+    User findByUsername(String username);
 
-    @Autowired
-    public UserServices(PeopleRepository peopleRepository) {
-        this.peopleRepository = peopleRepository;
-    }
+    List<User> findAll();
 
-    public User findByUsername(String username) {
-        return peopleRepository.findByUsername(username).orElse(null);
-    }
+    User findByEmail(String email);
 
-    public List<User> findAll() {
-        return peopleRepository.findAll();
-    }
+    User readUser(long id);
 
-    public User findOne(Long id) {
-        return peopleRepository.findById(id).orElse(null);
-    }
+    void save(User user);
 
-    public void save(User user) {
-        peopleRepository.save(user);
-    }
-
-    public void delete(Long id) {
-        peopleRepository.deleteById(id);
-    }
-
-    public User readUser(long id) {
-        return peopleRepository.findById(id).orElseThrow(() ->
-                new EntityNotFoundException("User with id = " + id + " not exist"));
-    }
-
-    public User findByEmail(String email) {
-        return peopleRepository.findByEmail(email);
-    }
+    void delete(Long id);
 
 }
