@@ -29,9 +29,20 @@ public class RegistrationServices {
         if (user.getRoles() == null) {
             user.setRoles(new HashSet<>());
         }
+        // Создание роли USER
         Role userRole = new Role();
-        userRole.setName("ROLE_ADMIN");
+        userRole.setName("ROLE_USER");
+
+        // Добавление роли USER
         user.getRoles().add(userRole);
+
+        // Создание роли ADMIN
+        Role adminRole = new Role();
+        adminRole.setName("ROLE_ADMIN");
+
+        // Добавление роли ADMIN
+        user.getRoles().add(adminRole);
+
         peopleRepository.save(user);
     }
 }

@@ -28,7 +28,7 @@ public class UserController {
     }
 
     @GetMapping
-    public String showUser( Model model, Principal principal) {
+    public String showUser(Model model, Principal principal) {
         User user;
 
         String email = principal.getName();
