@@ -4,12 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.igor.PP_3_1_3.model.User;
 import ru.igor.PP_3_1_3.repositories.PeopleRepository;
 import ru.igor.PP_3_1_3.security.UserDetailsImpl;
 
 import java.util.Optional;
 
+@Transactional(readOnly = true)
 @Service
 public class UserDetailsServicesImpl implements UserDetailsService {
 

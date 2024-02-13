@@ -12,17 +12,14 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.igor.PP_3_1_3.model.Role;
 import ru.igor.PP_3_1_3.model.User;
 import ru.igor.PP_3_1_3.services.RoleServices;
 import ru.igor.PP_3_1_3.services.UserServices;
+import ru.igor.PP_3_1_3.utill.UserFindRole;
 import ru.igor.PP_3_1_3.utill.UserValidator;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/admin")
@@ -32,13 +29,15 @@ public class AdminController {
     private final RoleServices roleService;
     private final UserValidator userValidator;
     private final PasswordEncoder passwordEncoder;
+    private final UserFindRole findRole;
 
     @Autowired
-    public AdminController(UserServices userService, RoleServices roleService, UserValidator userValidator, PasswordEncoder passwordEncoder) {
+    public AdminController(UserServices userService, RoleServices roleService, UserValidator userValidator, PasswordEncoder passwordEncoder, UserFindRole findRole) {
         this.userService = userService;
         this.roleService = roleService;
         this.userValidator = userValidator;
         this.passwordEncoder = passwordEncoder;
+        this.findRole = findRole;
     }
 
     @GetMapping()
@@ -110,23 +109,13 @@ public class AdminController {
 
     public void addAttributesToMainPage(Model model, Principal principal) {
         User user = userService.findByEmail(principal.getName());
+
         if (user == null) {
             user = new User();
         }
 
-        List<String> roles;
-        Set<Role> userRoles = user.getRoles();
-        if (userRoles != null) {
-            roles = userRoles.stream()
-                    .map(Role::getName)
-                    .map(role -> role.split("_")[1])
-                    .toList();
-        } else {
-            roles = Collections.emptyList(); // возвращает пустой список в случае, если roles == null
-        }
-
         model.addAttribute("authUser", user);
-        model.addAttribute("userRoles", roles);
+        model.addAttribute("userRoles", findRole.findRole(user));
 
         if (!model.containsAttribute("updatingUser")) {
             model.addAttribute("updatingUser", new User());

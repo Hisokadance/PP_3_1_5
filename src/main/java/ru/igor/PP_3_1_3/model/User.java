@@ -26,17 +26,21 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @Email(message = "Email should be valid")
     @NotEmpty(message = "Email should not be empty")
     @Column(name = "email", nullable = false, unique = true)
     private String email;
+
     @NotEmpty(message = "Name should not be empty")
     @Column(name = "username", nullable = false, unique = true)
     private String username;
+
     @NotEmpty(message = "Name should not be empty")
     @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
     @Column(name = "name", nullable = false)
     private String name;
+
     @Column(name = "age", nullable = false)
     @Min(value = 0, message = "Age should be greater than 0")
     private Integer age;
@@ -44,7 +48,7 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))

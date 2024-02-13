@@ -43,9 +43,8 @@
         <th:block th:each="role: ${listRoles}">
             <label class="form-label fw-bold" for="role-select">Role</label>
             <select class="form-select" id="role-select" th:field="*{roles}" multiple>
-                <option th:each="role : ${listRoles}"
-                        th:text="${role.name.split('_')[1]}"
-                        th:value="${role.id}">
+                <option value="1">ADMIN</option>
+                <option value="2">USER</option>
             </select>
         </th:block>
     </label>
