@@ -1,70 +1,72 @@
-package ru.igor.PP_3_1_3.config;
+package ru.igor.PP_3_1_3.configs;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import ru.igor.PP_3_1_3.services.UserDetailsServicesImpl;
 
+@Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-    private final UserDetailsServicesImpl userDetailsServices;
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final SuccessUserHandler successUserHandler;
+    private final UserDetailsService userDetailsService;
 
     @Autowired
-    public SecurityConfig(UserDetailsServicesImpl userDetailsServices, SuccessUserHandler successUserHandler) {
-        this.userDetailsServices = userDetailsServices;
+    public WebSecurityConfig(SuccessUserHandler successUserHandler, UserDetailsService userDetailsService) {
         this.successUserHandler = successUserHandler;
+        this.userDetailsService = userDetailsService;
+
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //конфигурируем сам Spring Security
-        //конфигурируем авторизацию
-        http.authorizeRequests()
+        http.
+                csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/css/**").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/auth/login", "/auth/registration", "/error").permitAll()
-                .anyRequest().hasAnyRole("USER", "ADMIN")
+                .antMatchers("/api/**").hasRole("ADMIN")
+                .antMatchers("/user/**").hasAnyRole("ADMIN", "USER")
+                .anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/auth/login")
-                .loginProcessingUrl("/process_login")
+                .formLogin()
                 .successHandler(successUserHandler)
-                .failureUrl("/auth/login?error")
+                .permitAll()
                 .and()
-                .logout().logoutUrl("/logout").logoutSuccessUrl("/auth/login");
+                .logout()
+                .logoutSuccessUrl("/login")
+                .permitAll();
     }
 
-    //настраивает аунтефикацию
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsServices)
-                .passwordEncoder(getPasswordEncoder());
+        auth.authenticationProvider(daoAuthenticationProvider());
     }
 
     @Bean
     public PasswordEncoder getPasswordEncoder() {
-        return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder(12);
     }
 
     @Bean
     protected DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
         daoAuthenticationProvider.setPasswordEncoder(getPasswordEncoder());
-        daoAuthenticationProvider.setUserDetailsService(userDetailsServices);
+        daoAuthenticationProvider.setUserDetailsService(userDetailsService);
+
         return daoAuthenticationProvider;
     }
 
     @Override
-    public void configure(WebSecurity web) {
+    public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/css/**");
     }
 }

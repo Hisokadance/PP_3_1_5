@@ -35,7 +35,6 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Email</th>
-                                    <th>Username</th>
                                     <th>Name</th>
                                     <th>Age</th>
                                     <th>Roles</th>
@@ -45,7 +44,6 @@
                                 <tr>
                                     <td th:text="${authUser.id}"></td>
                                     <td th:text="${authUser.email}"></td>
-                                    <td th:text="${authUser.username}"></td>
                                     <td th:text="${authUser.name}"></td>
                                     <td th:text="${authUser.age}"></td>
                                     <td th:text = "${#strings.listJoin(userRoles, ', ')}"></td>
