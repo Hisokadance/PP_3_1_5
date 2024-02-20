@@ -22,6 +22,7 @@ import ru.igor.PP_3_1_3.util.UserNotCreatedException;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -49,7 +50,7 @@ public class ApiController {
         if (bindingResult.hasErrors()) {
             List<String> errorMessages = bindingResult.getFieldErrors().stream()
                     .map(DefaultMessageSourceResolvable::getDefaultMessage)
-                    .toList();
+                    .collect(Collectors.toList());
             throw new UserNotCreatedException(errorMessages);
         }
 
@@ -63,7 +64,7 @@ public class ApiController {
         if (bindingResult.hasErrors()) {
             List<String> errorMessages = bindingResult.getFieldErrors().stream()
                     .map(DefaultMessageSourceResolvable::getDefaultMessage)
-                    .toList();
+                    .collect(Collectors.toList());
             throw new UserNotCreatedException(errorMessages);
         }
 

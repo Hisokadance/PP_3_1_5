@@ -10,6 +10,7 @@ import ru.igor.PP_3_1_3.services.UserService;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class AddAttributesToMainPage {
@@ -27,7 +28,7 @@ public class AddAttributesToMainPage {
         List<String> roles = user.getRoles().stream()
                 .map(Role::getName)
                 .map(role -> role.split("_")[1])
-                .toList();
+                .collect(Collectors.toList());
 
         model.addAttribute("authUser", user);
         model.addAttribute("userRoles", roles);
