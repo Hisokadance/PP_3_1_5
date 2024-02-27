@@ -18,12 +18,10 @@ import ru.igor.PP_3_1_3.services.UserService;
 import ru.igor.PP_3_1_3.util.UserErrorResponse;
 import ru.igor.PP_3_1_3.util.UserNotCreatedException;
 
-
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 
 @RestController
 @RequestMapping("/api")
@@ -78,11 +76,5 @@ public class ApiController {
 
         return new ResponseEntity<>(HttpStatus.OK);
 
-    }
-
-    @ExceptionHandler
-    private ResponseEntity<UserErrorResponse> handleException(UserNotCreatedException userNotCreatedException) {
-        UserErrorResponse response = new UserErrorResponse(userNotCreatedException.getErrors());
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 }

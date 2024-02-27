@@ -9,7 +9,6 @@ import ru.igor.PP_3_1_3.repositories.RoleRepository;
 import java.util.List;
 import java.util.Optional;
 
-
 @Transactional
 @Service
 public class RoleServiceImpl implements RoleService {

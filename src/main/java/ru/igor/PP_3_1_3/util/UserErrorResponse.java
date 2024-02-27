@@ -2,7 +2,7 @@ package ru.igor.PP_3_1_3.util;
 
 import java.util.List;
 
-public class UserErrorResponse {
+public class UserErrorResponse extends RuntimeException {
 
     private List<String> errors;
 

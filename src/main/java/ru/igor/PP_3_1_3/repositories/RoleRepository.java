@@ -7,7 +7,6 @@ import ru.igor.PP_3_1_3.entities.Role;
 
 import java.util.Optional;
 
-
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Long> {
     Optional<Role> findByName(String name);

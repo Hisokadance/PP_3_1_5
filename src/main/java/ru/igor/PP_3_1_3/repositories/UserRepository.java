@@ -8,7 +8,6 @@ import ru.igor.PP_3_1_3.entities.User;
 
 import java.util.Optional;
 
-
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     @Query("Select u from User u left join fetch u.roles where u.email=:email")

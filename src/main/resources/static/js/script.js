@@ -232,6 +232,33 @@ addNewUserForm.addEventListener('submit', event => {
             console.log('Ошибка при создании нового пользователя', error)
         })
 });
+// Проверяем доступ к вкладке "admin" при загрузке страницы
+document.addEventListener("DOMContentLoaded", function() {
+    checkAdminAccess();
+});
+
+// Функция для проверки доступа к вкладке "admin"
+function checkAdminAccess() {
+    fetch(BASE_URL + '/admin', { credentials: 'include' })
+        .then(response => {
+            if (response.ok) {
+                // Если доступ разрешен, ничего не делаем
+                console.log('Доступ к вкладке "admin" разрешен');
+            } else if (response.status === 403) {
+                // Если получен код состояния 403, значит доступ запрещен
+                console.log('Ошибка 403: Доступ к вкладке "admin" запрещен');
+                // Перенаправляем пользователя на страницу с сообщением об ошибке
+                window.location.href = '/error';
+            } else {
+                // Другие коды состояния
+                console.log('Произошла ошибка при проверке доступа к вкладке "admin"');
+            }
+        })
+        .catch(error => {
+            console.error('Произошла ошибка при проверке доступа к вкладке "admin":', error);
+        });
+}
+
 
 function showAlert(message, cssStyle, alertId) {
     const alert = document.createElement('div')

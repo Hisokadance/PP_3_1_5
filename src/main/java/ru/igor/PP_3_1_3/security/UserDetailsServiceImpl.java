@@ -6,7 +6,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import ru.igor.PP_3_1_3.repositories.UserRepository;
 
-
 @Component
 public class UserDetailsServiceImpl implements UserDetailsService {
     private final UserRepository userRepository;
