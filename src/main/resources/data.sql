@@ -1,4 +1,4 @@
-create table users
+CREATE TABLE IF NOT EXISTS users
 (
     id       int primary key AUTO_INCREMENT,
     age      int         not null,
@@ -7,13 +7,13 @@ create table users
     password varchar(255) not null
 );
 
-create table roles
+CREATE TABLE IF NOT EXISTS roles
 (
     id   int primary key AUTO_INCREMENT,
     name varchar(55) not null
 );
 
-create table users_roles
+CREATE TABLE IF NOT EXISTS users_roles
 (
     user_id int,
     role_id int,
@@ -37,9 +37,9 @@ VALUES (24, 'sergey@yandex.ru', 'sergey', '$2a$12$r/UgXbidDftGfwuZlXVd4eECHJcp1b
 INSERT INTO users (age, email, name, password)
 VALUES (51, 'ivan@google.com', 'ivan', '$2a$12$r/UgXbidDftGfwuZlXVd4eECHJcp1bviAVvcsQPAp0HVtwEBFU3sq');
 
-
 INSERT INTO users_roles (user_id, role_id)
 VALUES (1, 1);
+
 INSERT INTO users_roles (user_id, role_id)
 VALUES (2, 1);
 INSERT INTO users_roles (user_id, role_id)
