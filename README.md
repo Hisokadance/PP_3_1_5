@@ -4,6 +4,6 @@
 3. При любых изменениях данных страница приложения не должна перезагружаться!
 
 для входа на страницу используйте
-user   |  user@user.ru
+email: user@user.ru   | password  user
 или
-admin   | admin@admin.ru
+email: admin@admin.ru   | password admin
